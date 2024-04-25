@@ -14,24 +14,29 @@ import java.util.List;
 public class TestSistema {
 
     SistemaFilmes sistema;
-    List<Ator> filmesDoTeste;
+    List<Filme> filmesDoTeste;
+    List<Ator> atoresDoFilme;
 
     @BeforeEach
     public void setup() {
         sistema = new SistemaFilmes_Leticia_Iran_Wendell();
-        filmesDoTeste = new ArrayList<>();
     }
 
     @Test
     public void testaCadastro() {
+        atoresDoFilme = new ArrayList<>();
         boolean cadastrou = sistema.cadastrarFilme("#001", "127 Horas", 2010,
-                "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, filmesDoTeste);
+                "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, atoresDoFilme);
         assertEquals(true, cadastrou);
     }
 
     @Test
     public void testaPesquisaFilmePorNome() {
-
+        atoresDoFilme = new ArrayList<>();
+        sistema.cadastrarFilme("#001", "Vingadores: guerra Infinita", 2010,
+                "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, atoresDoFilme);
+        String nomeFilme = "Vingadores";
+        filmesDoTeste = sistema.pesquisaFilme(nomeFilme);
     }
 
     @Test
