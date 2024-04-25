@@ -2,20 +2,23 @@ package br.ufpb.dcx.MoviesManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class MoviesManager implements SistemaFilmes{
+public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
     private Map<String, Filme> filmes;
+    private double notaDoIMDBParaSelecaoDosMelhoresFilmes = 8.5;
 
-    public MoviesManager() {
+    public SistemaFilmes_Leticia_Iran_Wendell() {
         this.filmes = new HashMap<>();
     }
 
     @Override
-    public boolean cadastrarFilme(Filme filme) {
-        if (!this.filmes.containsKey(filme.getCodigo)) {
-            this.filmes.put(filme.getCodigo, filme.getNome,
-                    filme.getAnoDeLancamento, filme.getSinopse,
-                    filme.getNotaIMDB);
+    public boolean cadastrarFilme(String codigo, String nome, int anoDeLancamento, String sinopse,
+                                  double notaIMDB, GeneroFilme genero, List<Ator> atores) {
+        if (!this.filmes.containsKey(codigo)) {
+            this.filmes.put(codigo, (new Filme(codigo, nome, anoDeLancamento, sinopse,
+                    notaIMDB, genero, atores)));
             return true;
         } else {
             return false;
@@ -26,7 +29,7 @@ public class MoviesManager implements SistemaFilmes{
     public List<Filme> pesquisaFilme(String nome) {
         ArrayList<Filme> filmesEncontrados = new ArrayList<>();
         for (Filme f : this.filmes.values()) {
-            if(f.getNome.startsWith(nome)) {
+            if(f.getNome().startsWith(nome)) {
                 filmesEncontrados.add(f);
             }
         }
@@ -34,10 +37,10 @@ public class MoviesManager implements SistemaFilmes{
     }
 
     @Override
-    public List<Filme> pesquisaFilmesDoGenero(String genero) {
+    public List<Filme> pesquisaFilmesDoGenero(GeneroFilme genero) {
         ArrayList<Filme> filmesDeTalGenero = new ArrayList<>();
         for (Filme f : this.filmes.values()) {
-            if(f.getGenero.equals(genero)) {
+            if(f.getGenero().equals(genero)) {
                 filmesDeTalGenero.add(f);
             }
         }
@@ -45,9 +48,9 @@ public class MoviesManager implements SistemaFilmes{
     }
 
     @Override
-    public String pesquisaMaisInformacoesDoFilme(Filme filme) {
-        if (this.filmes.containsKey(filme.getCodigo)) {
-            Filme filmeEncontrado = this.filmes.get(filme.getCodigo);
+    public String pesquisaMaisInformacoesDoFilme(String codigo) {
+        if (this.filmes.containsKey(codigo)) {
+            Filme filmeEncontrado = this.filmes.get(codigo);
             return filmeEncontrado.toString();
         } else {
             return null;
@@ -66,14 +69,18 @@ public class MoviesManager implements SistemaFilmes{
 
     @Override
     public List<Filme> listarTodosOsFilmes() {
-        return this.filmes.values();
+        List<Filme> todosOsFilmes = new ArrayList<>();
+        for (Filme f : this.filmes.values()) {
+            todosOsFilmes.add(f);
+        }
+        return todosOsFilmes;
     }
 
     @Override
     public List<Filme> filmesLancadosNoAno(int ano) {
         ArrayList<Filme> filmesDeTalAno = new ArrayList<>();
         for (Filme f : this.filmes.values()) {
-            if (f.getAnoDeLancamento().equals(ano)) {
+            if (f.getAnoDeLancamento() == ano) {
                 filmesDeTalAno.add(f);
             }
         }
@@ -81,11 +88,13 @@ public class MoviesManager implements SistemaFilmes{
     }
 
     @Override
-    public int contarFilmes(List<Filme> listaDeFilmes) {
-        int cont = 0;
-        for (Filme f : listaDeFilmes) {
-            cont++;
+    public List<Filme> getFilmesBemAvaliados() {
+        List<Filme> filmesBemAvaliados = new ArrayList<>();
+        for (Filme f : this.filmes.values()) {
+            if (f.getNotaIMDB() >= notaDoIMDBParaSelecaoDosMelhoresFilmes) {
+                filmesBemAvaliados.add(f);
+            }
         }
-        return cont;
+        return filmesBemAvaliados;
     }
 }
