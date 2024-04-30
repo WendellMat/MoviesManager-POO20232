@@ -45,6 +45,7 @@ public class GUIv1 extends JFrame {
          menuPesquisar.add(menuPesquisaFilmePorGenero);
          menuPesquisar.add(menuPesquisaMaisInformacoesPorCodigo);
          menuPesquisar.add(menuFilmesDoAnoTal);
+
          menuCadastrarFilme.addActionListener(
                  (f) -> {
                      String codigo = JOptionPane.showInputDialog(this,
@@ -56,12 +57,15 @@ public class GUIv1 extends JFrame {
                      String sinopse = JOptionPane.showInputDialog(this,
                              "Qual a sinopse do filme?");;
                      double notaIMDB = Double.parseDouble(JOptionPane.showInputDialog(this,
-                             "Qual a nota do filme, de acordo com o IMDB?"));;
-                     GeneroFilme genero = perguntaGeneroDoFilme();
+                             "Qual a nota do filme, de acordo com o IMDB?"));
+                     String generoVelho = JOptionPane.showInputDialog(this,
+                             "Qual o gênero do filme?");
+                     GeneroFilme genero = converteGeneroDoFilmeParaENUM(generoVelho);
                      List<Ator> atores = perguntaElenco();
                      sistema.cadastrarFilme(codigo, nome, anoDeLancamento, sinopse, notaIMDB, genero, atores);
                  }
          );
+
          menuTodosOsFilmes.addActionListener(
                  (ae) -> {
                      List<Filme> todosOsFilmesRecuperados = sistema.listarTodosOsFilmes();
@@ -74,6 +78,7 @@ public class GUIv1 extends JFrame {
                      }
                  }
          );
+
          menuFilmesBemAvaliados.addActionListener(
                  (ae) -> {
                      List<Filme> filmesBemAvaliadosRecuperados = sistema.getFilmesBemAvaliados();
@@ -87,8 +92,53 @@ public class GUIv1 extends JFrame {
                  }
          );
 
+         menuPesquisaFilmePorNome.addActionListener(
+                 (ae) -> {
+                     String nomeDoFilmeAProcurar = JOptionPane.showInputDialog(
+                             "Qual o nome do filme que deseja procurar?");
+                     for (Filme f : sistema.pesquisaFilme(nomeDoFilmeAProcurar)) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
+
+         menuPesquisaFilmePorGenero.addActionListener(
+                 (ae) -> {
+                     String generoVelho = JOptionPane.showInputDialog(
+                             "Qual gênero você deseja buscar?");
+                     GeneroFilme genero = converteGeneroDoFilmeParaENUM(generoVelho);
+                     for (Filme f : sistema.pesquisaFilmesDoGenero(genero)) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
+
+         menuPesquisaMaisInformacoesPorCodigo.addActionListener(
+                 (ae) -> {
+                     String codigoDesejado = JOptionPane.showInputDialog(
+                             "Qual o código do filme que deseja procurar?");
+                     JOptionPane.showMessageDialog(this,
+                             sistema.pesquisaMaisInformacoesDoFilme(codigoDesejado));
+                 }
+         );
+
+         menuFilmesDoAnoTal.addActionListener(
+                 (ae) -> {
+                     int anoDesejado = Integer.parseInt(JOptionPane.showInputDialog(
+                             "Você procura os filmes de qual ano?"));
+                     List<Filme> filmesDeTalAno = new ArrayList<>();
+                     for (Filme f : sistema.filmesLancadosNoAno(anoDesejado)) {
+                         filmesDeTalAno.add(f);
+                     }
+                     for (Filme f : filmesDeTalAno) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
+
          barraDeMenu.add(menuCadastrar);
          barraDeMenu.add(menuFilmes);
+         barraDeMenu.add(menuPesquisar);
          setJMenuBar(barraDeMenu);
      }
 
@@ -101,9 +151,7 @@ public class GUIv1 extends JFrame {
          setLocation(x, y);
      }
 
-     public GeneroFilme perguntaGeneroDoFilme() {
-         String genero = JOptionPane.showInputDialog(this,
-                 "Qual o gênero do filme?");
+     public GeneroFilme converteGeneroDoFilmeParaENUM(String genero) {
          if (genero.equalsIgnoreCase("ação") || genero.equalsIgnoreCase("acao")) {
              return GeneroFilme.ACAO;
          } else if (genero.equalsIgnoreCase("drama")) {
