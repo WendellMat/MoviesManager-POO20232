@@ -36,7 +36,6 @@ public class TestSistema {
         sistema.cadastrarFilme("#001", "Vingadores: guerra Infinita", 2010,
                 "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, atoresDoFilme);
         String nomeFilme = "Vingadores";
-        //filmesDoTeste = sistema.pesquisaFilme(nomeFilme);
         assertTrue(sistema.pesquisaFilme(nomeFilme).contains(new Filme("#001", "Vingadores: guerra Infinita", 2010,
                 "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, atoresDoFilme)));
     }
