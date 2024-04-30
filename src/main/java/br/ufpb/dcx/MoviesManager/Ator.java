@@ -1,5 +1,7 @@
 package br.ufpb.dcx.MoviesManager;
 
+import java.util.Objects;
+
 public class Ator {
   private String nome;
   private String genero;
@@ -37,6 +39,27 @@ public class Ator {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ator ator = (Ator) o;
+
+        if (idade != ator.idade) return false;
+        if (!Objects.equals(nome, ator.nome)) return false;
+        return Objects.equals(genero, ator.genero);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nome != null ? nome.hashCode() : 0;
+        result = 31 * result + (genero != null ? genero.hashCode() : 0);
+        result = 31 * result + idade;
+        return result;
+    }
+
     public String toString(){
       return "Nome do Ator: "+this.nome+"Gênero: "+this.genero+"Idade: "+this.idade;
     }
