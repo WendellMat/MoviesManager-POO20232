@@ -2,6 +2,8 @@ package br.ufpb.dcx.MoviesManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUIv1 extends JFrame {
     JLabel linhaCentral;
@@ -43,6 +45,51 @@ public class GUIv1 extends JFrame {
          menuPesquisar.add(menuPesquisaFilmePorGenero);
          menuPesquisar.add(menuPesquisaMaisInformacoesPorCodigo);
          menuPesquisar.add(menuFilmesDoAnoTal);
+         menuCadastrarFilme.addActionListener(
+                 (f) -> {
+                     String codigo = JOptionPane.showInputDialog(this,
+                             "Qual o código do filme?");
+                     String nome = JOptionPane.showInputDialog(this,
+                             "Qual o nome do filme?");
+                     int anoDeLancamento = Integer.parseInt(JOptionPane.showInputDialog(this,
+                             "Qual o ano de lançamento do filme?"));;
+                     String sinopse = JOptionPane.showInputDialog(this,
+                             "Qual a sinopse do filme?");;
+                     double notaIMDB = Double.parseDouble(JOptionPane.showInputDialog(this,
+                             "Qual a nota do filme, de acordo com o IMDB?"));;
+                     GeneroFilme genero = perguntaGeneroDoFilme();
+                     List<Ator> atores = perguntaElenco();
+                     sistema.cadastrarFilme(codigo, nome, anoDeLancamento, sinopse, notaIMDB, genero, atores);
+                 }
+         );
+         menuTodosOsFilmes.addActionListener(
+                 (ae) -> {
+                     List<Filme> todosOsFilmesRecuperados = sistema.listarTodosOsFilmes();
+                     List<Filme> todosOsFilmesCadastrados = new ArrayList<>();
+                     for (Filme f : todosOsFilmesRecuperados) {
+                         todosOsFilmesCadastrados.add(f);
+                     }
+                     for (Filme f : todosOsFilmesCadastrados) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
+         menuFilmesBemAvaliados.addActionListener(
+                 (ae) -> {
+                     List<Filme> filmesBemAvaliadosRecuperados = sistema.getFilmesBemAvaliados();
+                     List<Filme> filmesBemAvaliados = new ArrayList<>();
+                     for (Filme f : filmesBemAvaliadosRecuperados) {
+                         filmesBemAvaliados.add(f);
+                     }
+                     for (Filme f : filmesBemAvaliados) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
+
+         barraDeMenu.add(menuCadastrar);
+         barraDeMenu.add(menuFilmes);
+         setJMenuBar(barraDeMenu);
      }
 
      private void centralizarCaixa(int width, int height) {
@@ -53,6 +100,41 @@ public class GUIv1 extends JFrame {
          int y = (d.height - getHeight()) / 2;
          setLocation(x, y);
      }
+
+     public GeneroFilme perguntaGeneroDoFilme() {
+         String genero = JOptionPane.showInputDialog(this,
+                 "Qual o gênero do filme?");
+         if (genero.equalsIgnoreCase("ação") || genero.equalsIgnoreCase("acao")) {
+             return GeneroFilme.ACAO;
+         } else if (genero.equalsIgnoreCase("drama")) {
+             return GeneroFilme.DRAMA;
+         } else if (genero.equalsIgnoreCase("comedia") || genero.equalsIgnoreCase("comédia")) {
+            return GeneroFilme.COMEDIA;
+         } else if (genero.equalsIgnoreCase("ficção científica") || genero.equalsIgnoreCase("sci-fi")) {
+             return GeneroFilme.SCIFI;
+         } else if (genero.equalsIgnoreCase("terror") || genero.equalsIgnoreCase("horror")) {
+             return GeneroFilme.TERROR;
+         }
+         return null;
+     }
+
+     public List<Ator> perguntaElenco() {
+         List<Ator> elenco = new ArrayList<>();
+         int quantAtores = Integer.parseInt(JOptionPane.showInputDialog(this,
+                 "Quantos atores você deseja cadastrar?"));
+         for (int i=0; i<quantAtores; i++) {
+             String nome = JOptionPane.showInputDialog(this,
+                     "Qual o nome do ator?");
+             String genero = JOptionPane.showInputDialog(this,
+                     "Qual o gênero do ator? (M/F)");;
+             int idade = Integer.parseInt(JOptionPane.showInputDialog(this,
+                     "Qual a idade do ator?"));
+             Ator ator = new Ator(nome, genero, idade);
+             elenco.add(ator);
+         }
+         return elenco;
+     }
+
 
     public static void main(String[] args) {
         JFrame janela = new br.ufpb.dcx.MoviesManager.GUIv1();
