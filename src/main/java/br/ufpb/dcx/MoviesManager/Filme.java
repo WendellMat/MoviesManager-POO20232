@@ -2,6 +2,7 @@ package br.ufpb.dcx.MoviesManager;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class Filme implements Serializable{
     private String codigo;
@@ -75,6 +76,21 @@ public class Filme implements Serializable{
 
     public void setGenero(GeneroFilme genero) {
         this.genero = genero;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Filme filme = (Filme) o;
+
+        return Objects.equals(codigo, filme.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo != null ? codigo.hashCode() : 0;
     }
 
     @Override
