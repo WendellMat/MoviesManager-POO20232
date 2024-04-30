@@ -27,7 +27,7 @@ public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
 
     @Override
     public List<Filme> pesquisaFilme(String nome) {
-        ArrayList<Filme> filmesEncontrados = new ArrayList<>();
+        List<Filme> filmesEncontrados = new ArrayList<>();
         for (Filme f : this.filmes.values()) {
             if(f.getNome().startsWith(nome)) {
                 filmesEncontrados.add(f);
