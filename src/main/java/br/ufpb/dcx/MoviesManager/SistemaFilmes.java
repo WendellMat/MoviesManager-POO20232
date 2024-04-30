@@ -8,7 +8,7 @@ public interface SistemaFilmes {
     List<Filme> pesquisaFilme(String nome);
     List<Filme> pesquisaFilmesDoGenero(GeneroFilme genero);
     String pesquisaMaisInformacoesDoFilme(String codigo);
-    boolean existeFilmeDoGenero(String genero);
+    boolean existeFilmeDoGenero(GeneroFilme genero);
     List<Filme> listarTodosOsFilmes();
     List<Filme> filmesLancadosNoAno(int ano);
     List<Filme> getFilmesBemAvaliados();

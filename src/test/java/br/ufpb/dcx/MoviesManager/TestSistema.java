@@ -43,16 +43,23 @@ public class TestSistema {
 
     @Test
     public void testaExisteFilme() {
+        sistema.cadastrarFilme("0001","0007",2017,"jjjjj",5.0,GeneroFilme.ACAO,atoresDoFilme);
+        boolean g = sistema.existeFilmeDoGenero(GeneroFilme.ACAO);
+        assertTrue(g);
 
     }
 
     @Test
     public void testaPesquisaTodosOsFilmesCadastrados() {
+        sistema.cadastrarFilme("0005","top gun",2017,"jjjjj",5.0,GeneroFilme.ACAO,atoresDoFilme);
+        assertTrue(sistema.listarTodosOsFilmes().size() == 1);
 
     }
 
     @Test
     public void testaGetFilmesLancadosNoAno() {
+        sistema.cadastrarFilme("0006","top gun 2",2018,"jjjjj",5.0,GeneroFilme.ACAO,atoresDoFilme);
+        assertTrue(sistema.filmesLancadosNoAno(2018).size() == 1);
 
     }
 }

@@ -58,7 +58,7 @@ public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
     }
 
     @Override
-    public boolean existeFilmeDoGenero(String genero) {
+    public boolean existeFilmeDoGenero(GeneroFilme genero) {
         for (Filme f : this.filmes.values()) {
             if (f.getGenero().equals(genero)) {
                 return true;
