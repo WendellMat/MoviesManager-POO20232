@@ -40,7 +40,7 @@ public class GUIv1 extends JFrame {
          JMenuItem menuPesquisaMaisInformacoesPorCodigo = new JMenuItem(
                  "Pesquisa mais informações por código");
          JMenuItem menuFilmesDoAnoTal = new JMenuItem(
-                 "PesquisaFilmesPorAno");
+                 "Pesquisa filmes por ano");
          menuPesquisar.add(menuPesquisaFilmePorNome);
          menuPesquisar.add(menuPesquisaFilmePorGenero);
          menuPesquisar.add(menuPesquisaMaisInformacoesPorCodigo);
