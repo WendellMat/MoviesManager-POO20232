@@ -45,6 +45,13 @@ public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
             return false;
         }
     }
+    public boolean removerFilme(String codigo) {
+        if (this.filmes.containsKey(codigo)) {
+            this.filmes.remove(codigo);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public List<Filme> pesquisaFilme(String nome) {
@@ -118,4 +125,5 @@ public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
         }
         return filmesBemAvaliados;
     }
+
 }

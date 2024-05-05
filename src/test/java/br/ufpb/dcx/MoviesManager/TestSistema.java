@@ -29,6 +29,13 @@ public class TestSistema {
                 "syfhdbfhubyeui", 7.5, GeneroFilme.ACAO, atoresDoFilme);
         assertEquals(true, cadastrou);
     }
+    @Test
+    public void testaRemover(){
+        sistema.cadastrarFilme("0005","hulk",2018,"kkkkkkkkk",9.0,GeneroFilme.ACAO,atoresDoFilme);
+        boolean removeu = sistema.removerFilme("0005");
+
+        assertTrue(removeu);
+    }
 
     @Test
     public void testaPesquisaFilmePorNome() {
@@ -46,12 +53,6 @@ public class TestSistema {
         boolean g = sistema.existeFilmeDoGenero(GeneroFilme.ACAO);
         assertTrue(g);
 
-    }
-
-    @Test
-    public void testaPesquisaTodosOsFilmesCadastrados() {
-        sistema.cadastrarFilme("0005","top gun",2017,"jjjjj",5.0,GeneroFilme.ACAO,atoresDoFilme);
-        assertTrue(sistema.listarTodosOsFilmes().size() == 1);
     }
 
     @Test

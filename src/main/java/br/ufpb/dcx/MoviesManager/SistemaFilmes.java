@@ -15,4 +15,5 @@ public interface SistemaFilmes {
 
     public boolean salvarDados();
     public void recuperaDados();
+    public boolean removerFilme(String codigo);
 }
