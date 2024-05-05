@@ -1,0 +1,11 @@
+Coesão Média-Alta: As classes SistemaFilmes_Leticia_Iran_Wendell e GravadorDeDados estão focadas nas operações
+relacionadas ao gerenciamento de filmes, como cadastrar, pesquisar, listar e salvar filmes. Elas mantêm a
+responsabilidade sobre a manipulação dos dados dos filmes.
+
+Acoplamento Médio: A classe GUIv1 interage diretamente com SistemaFilmes_Leticia_Iran_Wendell para realizar
+operações como cadastro, listagem e pesquisa de filmes. A GUI depende fortemente do sistema de gerenciamento de
+filmes para funcionar.
+
+Melhorias futuras para a subtração de Bad Smells: Implementação de classes como "cadastrarController", "SearchController"
+e entre outras visando a aplicação de um método para subtruir o Bad Smell "Shotgun Shot". Além disso, diminuir o 
+acoplamento entre as classes GUIv1 e a classe SistemaFilmes_Leticia_Iran_Wendell.

@@ -9,7 +9,7 @@ public class GravadorDeDados {
 
     public HashMap<String, Filme> recuperarFilmes() throws IOException {
         ObjectInputStream in = null;
-        try{
+        try {
             in = new ObjectInputStream(new FileInputStream(ARQUIVO_FILMES));
             return (HashMap<String, Filme>) in.readObject();
         } catch (Exception e){
