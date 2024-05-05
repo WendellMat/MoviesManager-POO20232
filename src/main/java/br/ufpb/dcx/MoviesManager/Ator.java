@@ -62,6 +62,6 @@ public class Ator implements Serializable {
     }
 
     public String toString(){
-      return "Nome do Ator: "+this.nome+"Gênero: "+this.genero+"Idade: "+this.idade;
+      return this.nome;
     }
 }

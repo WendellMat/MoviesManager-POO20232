@@ -96,13 +96,13 @@ public class Filme implements Serializable{
     @Override
     public String toString() {
         return "Filme{" +
-                "\ncodigo= " + codigo +
-                "\nnome= " + nome +
-                "\nanoDeLancamento= " + anoDeLancamento +
-                "\nsinopse= " + sinopse +
-                "\nnotaIMDB= " + notaIMDB +
-                "\ngenero= " + genero +
-                "\natores= " + atores +
+                "\nCódigo: " + codigo +
+                "\nNome: " + nome +
+                "\nAno de Lancamento: " + anoDeLancamento +
+                "\nSinopse: " + sinopse +
+                "\nNota IMDB: " + notaIMDB +
+                "\nGênero: " + genero +
+                "\nAtores: " + atores +
                 "\n}";
     }
 }

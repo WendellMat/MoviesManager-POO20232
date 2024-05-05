@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GUIv1 extends JFrame {
     JLabel linhaCentral;
-    ImageIcon logoImg = new ImageIcon("./imgs/logo.jpg");
+    ImageIcon logoImg = new ImageIcon("./imgs/logo.png");
     SistemaFilmes sistema = new SistemaFilmes_Leticia_Iran_Wendell();
     JMenuBar barraDeMenu = new JMenuBar();
 
