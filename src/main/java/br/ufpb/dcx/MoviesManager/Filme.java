@@ -96,13 +96,50 @@ public class Filme implements Serializable{
     @Override
     public String toString() {
         return "Filme{" +
-                "\ncodigo= " + codigo +
-                "\nnome= " + nome +
-                "\nanoDeLancamento= " + anoDeLancamento +
-                "\nsinopse= " + sinopse +
-                "\nnotaIMDB= " + notaIMDB +
-                "\ngenero= " + genero +
-                "\natores= " + atores +
+                "\nCódigo: " + codigo +
+                "\nNome: " + nome +
+                "\nAno de Lançamento: " + anoDeLancamento +
+                "\nSinopse: " + sinopse +
+                "\nNota do IMDB: " + notaIMDB +
+                "\nGênero: " + traduzirGeneroDoFilme() +
+                "\nAtores: " + getNomesDosAtoresDoFilme() +
                 "\n}";
+    }
+
+    public String getNomesDosAtoresDoFilme() {
+        if (atores.size() > 1) {
+            String nomesDosAtores = new String();
+            for (Ator a : atores) {
+                if (atores.indexOf(a) == (atores.size()-1)) {
+                    nomesDosAtores = nomesDosAtores + a.getNome();
+                } else {
+                    nomesDosAtores = nomesDosAtores + a.getNome() + ", ";
+                }
+            }
+            return nomesDosAtores;
+        } else {
+            return atores.get(0).getNome();
+        }
+    }
+
+    public String traduzirGeneroDoFilme() {
+        switch (this.genero) {
+            case TERROR -> {
+                return "Terror";
+            }
+            case SCIFI -> {
+                return "Sci-Fi";
+            }
+            case COMEDIA -> {
+                return "Comédia";
+            }
+            case DRAMA -> {
+                return "Drama";
+            }
+            case ACAO -> {
+                return "Ação";
+            }
+        }
+        return null;
     }
 }
