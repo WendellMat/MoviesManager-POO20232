@@ -66,7 +66,18 @@ public class GUIv1 extends JFrame {
                  }
          );
 
-         menuTodosOsFilmes.addActionListener(new CadastrarFilmesController(sistema, this));
+         menuTodosOsFilmes.addActionListener(
+                 (ae) -> {
+                     List<Filme> todosOsFilmesRecuperados = sistema.listarTodosOsFilmes();
+                     List<Filme> todosOsFilmesCadastrados = new ArrayList<>();
+                     for (Filme f : todosOsFilmesRecuperados) {
+                         todosOsFilmesCadastrados.add(f);
+                     }
+                     for (Filme f : todosOsFilmesCadastrados) {
+                         JOptionPane.showMessageDialog(this, f.toString());
+                     }
+                 }
+         );
 
          menuFilmesBemAvaliados.addActionListener(
                  (ae) -> {

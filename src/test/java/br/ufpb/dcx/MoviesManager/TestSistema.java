@@ -52,7 +52,6 @@ public class TestSistema {
     public void testaPesquisaTodosOsFilmesCadastrados() {
         sistema.cadastrarFilme("0005","top gun",2017,"jjjjj",5.0,GeneroFilme.ACAO,atoresDoFilme);
         assertTrue(sistema.listarTodosOsFilmes().size() == 1);
-
     }
 
     @Test
