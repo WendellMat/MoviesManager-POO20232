@@ -48,6 +48,9 @@ public class GUIv1 extends JFrame {
          JMenu menuSalvar = new JMenu("Salvar");
          JMenuItem menuSalvarDados = new JMenuItem("Salvar dados");
          menuSalvar.add(menuSalvarDados);
+         JMenu menuRemover = new JMenu("Remover");
+         JMenuItem menuRemoverFilme = new JMenuItem("Remover Filme");
+         menuRemover.add(menuRemoverFilme);
 
 
 
@@ -151,10 +154,23 @@ public class GUIv1 extends JFrame {
                      }
                  }
          );
+         menuRemoverFilme.addActionListener(
+                 (ae) -> {
+                     String codigo = JOptionPane.showInputDialog(this, "Digite o código do filme a ser removido:");
+                     if (codigo != null && !codigo.isEmpty()) {
+                         boolean removido = sistema.removerFilme(codigo);
+                         if (removido) {
+                             JOptionPane.showMessageDialog(this, "Filme removido com sucesso!");
+                         } else {
+                             JOptionPane.showMessageDialog(this, "Não foi possível remover o filme. Verifique o código.");
+                         }
+                     }
+         });
 
          barraDeMenu.add(menuCadastrar);
          barraDeMenu.add(menuFilmes);
          barraDeMenu.add(menuPesquisar);
+         barraDeMenu.add(menuRemover);
          barraDeMenu.add(menuSalvar);
          setJMenuBar(barraDeMenu);
 
