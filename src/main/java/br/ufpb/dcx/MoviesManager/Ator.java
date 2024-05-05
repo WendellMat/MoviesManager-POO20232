@@ -1,8 +1,9 @@
 package br.ufpb.dcx.MoviesManager;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Ator {
+public class Ator implements Serializable {
   private String nome;
   private String genero;
   private int idade;

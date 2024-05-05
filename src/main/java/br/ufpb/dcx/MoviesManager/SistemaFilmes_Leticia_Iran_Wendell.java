@@ -1,5 +1,6 @@
 package br.ufpb.dcx.MoviesManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +10,28 @@ public class SistemaFilmes_Leticia_Iran_Wendell implements SistemaFilmes{
     private Map<String, Filme> filmes;
     private double notaDoIMDBParaSelecaoDosMelhoresFilmes = 8.5;
 
+    private GravadorDeDados gravador = new GravadorDeDados();
+
     public SistemaFilmes_Leticia_Iran_Wendell() {
+
         this.filmes = new HashMap<>();
+        recuperaDados();
+    }
+    public boolean salvarDados(){
+        try {
+            this.gravador.salvarFilmes(this.filmes);
+            return true;
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+    public void recuperaDados(){
+        try {
+            this.filmes = this.gravador.recuperarFilmes();
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override

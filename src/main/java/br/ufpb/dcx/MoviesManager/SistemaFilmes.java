@@ -12,4 +12,7 @@ public interface SistemaFilmes {
     List<Filme> listarTodosOsFilmes();
     List<Filme> filmesLancadosNoAno(int ano);
     List<Filme> getFilmesBemAvaliados();
+
+    public boolean salvarDados();
+    public void recuperaDados();
 }

@@ -45,6 +45,10 @@ public class GUIv1 extends JFrame {
          menuPesquisar.add(menuPesquisaFilmePorGenero);
          menuPesquisar.add(menuPesquisaMaisInformacoesPorCodigo);
          menuPesquisar.add(menuFilmesDoAnoTal);
+         JMenu menuSalvar = new JMenu("Salvar");
+         JMenuItem menuSalvarDados = new JMenuItem("Salvar dados");
+         menuSalvar.add(menuSalvarDados);
+
 
          menuCadastrarFilme.addActionListener(
                  (f) -> {
@@ -135,11 +139,24 @@ public class GUIv1 extends JFrame {
                      }
                  }
          );
+         menuSalvarDados.addActionListener(
+                 (ae) -> {
+                     boolean cadastrou = sistema.salvarDados();
+                     if(cadastrou ){
+                         JOptionPane.showMessageDialog(this, "Salvo com Sucesso!");
+
+                     }else{
+                         JOptionPane.showMessageDialog(this, "Opa! Não Salvou! ");
+                     }
+                 }
+         );
 
          barraDeMenu.add(menuCadastrar);
          barraDeMenu.add(menuFilmes);
          barraDeMenu.add(menuPesquisar);
+         barraDeMenu.add(menuSalvar);
          setJMenuBar(barraDeMenu);
+
      }
 
      private void centralizarCaixa(int width, int height) {
